@@ -1,10 +1,16 @@
 #include "CppUTest/TestHarness.h"
 
-TEST_GROUP(FirstTestGroup)
+extern "C"
+{
+#include "game_of_life.h"
+}
+
+TEST_GROUP(Cell)
 {
 };
 
-TEST(FirstTestGroup, FirstTest)
+TEST(Cell, NewCellsAreDead)
 {
-    FAIL("Fail me!");
+    Cell cell;
+    CHECK(Cell_IsDead(cell));
 }
