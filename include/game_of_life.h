@@ -7,4 +7,12 @@ typedef struct {
 
 bool Cell_IsDead(Cell cell);
 
+
+typedef struct {
+	Cell cell;
+} World;
+
+int World_CellCount(World world);
+Cell World_GetCell(World world, int index);
+
 #endif
