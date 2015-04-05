@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include "coords.h"
 
 Coords Coords_Create()
