@@ -32,13 +32,14 @@ TEST_GROUP(Coordinates)
 {
 };
 
+#define FOR_EACH_COORD(X) for (Coord Y = Coords_First(&X); !compare_coords(Y, NullCoord()); Y = Coords_Next(&X))
 TEST(Coordinates, CanIterateOverEmptyListOfCoordinates)
 {
 	Coords coords = new_Coords();
 	CHECK_EQUAL(0, Coords_Count(&coords));
 
 	int loop_counter = 0;
-	for (Coord coord = Coords_First(&coords); !compare_coords(coord, NullCoord()); coord = Coords_Next(&coords)) {
+	FOR_EACH_COORD(coords) {
 		loop_counter++;
 	}
 
@@ -59,7 +60,7 @@ TEST(Coordinates, CanAddCoordinateToList)
 	CHECK_EQUAL(1, Coords_Count(&coords));
 
 	int loop_counter = 0;
-	for (coord = Coords_First(&coords); !compare_coords(coord, NullCoord()); coord = Coords_Next(&coords)) {
+	FOR_EACH_COORD(coords) {
 		loop_counter++;
 		CHECK_EQUAL(3, coord.x);
 		CHECK_EQUAL(8, coord.y);
