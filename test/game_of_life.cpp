@@ -114,6 +114,26 @@ TEST(Coordinates, CanAddMultipleCoordinatesToList)
 	Coords_Destroy(coords);
 }
 
+TEST(Coordinates, DuplicateCoordinatesAreNotStored)
+{
+	Coords coords = Coords_Create();
+
+	Coord a = new_Coord(3, 8);
+	Coord b = new_Coord(3, 8);
+	Coords_Add(coords, a);
+	Coords_Add(coords, b);
+	CHECK_EQUAL(1, Coords_Count(coords));
+
+	Coord coord = Coords_First(coords);
+	CHECK(compare_coords(coord, a));
+	CHECK(compare_coords(coord, b));
+
+	coord = Coords_Next(coords);
+	CHECK(compare_coords(coord, NullCoord()));
+
+	Coords_Destroy(coords);
+}
+
 
 TEST_GROUP(Coordinate)
 {

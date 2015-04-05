@@ -114,6 +114,12 @@ int Coords_Count(Coords coords)
 
 void Coords_Add(Coords coords, Coord coord)
 {
+	for (int i = 0; i < COORDS_SIZE; i++) {
+		if (compare_coords(coords->list[i], coord)) {
+			return;
+		}
+	}
+
 	coords->list[coords->count++] = coord;
 }
 
@@ -121,13 +127,15 @@ Coords Coord_GetNeighbourCoords(Coord coord)
 {
 	Coords coords = Coords_Create();
 	Coords_Add(coords, new_Coord(coord.x-1, coord.y-1));
-	Coords_Add(coords, new_Coord(coord.x-1, coord.y-1));
-	Coords_Add(coords, new_Coord(coord.x-1, coord.y-1));
-	Coords_Add(coords, new_Coord(coord.x-1, coord.y-1));
-	Coords_Add(coords, new_Coord(coord.x-1, coord.y-1));
-	Coords_Add(coords, new_Coord(coord.x-1, coord.y-1));
-	Coords_Add(coords, new_Coord(coord.x-1, coord.y-1));
-	Coords_Add(coords, new_Coord(coord.x-1, coord.y-1));
+	Coords_Add(coords, new_Coord(coord.x-1, coord.y));
+	Coords_Add(coords, new_Coord(coord.x-1, coord.y+1));
+
+	Coords_Add(coords, new_Coord(coord.x, coord.y-1));
+	Coords_Add(coords, new_Coord(coord.x, coord.y+1));
+
+	Coords_Add(coords, new_Coord(coord.x+1, coord.y-1));
+	Coords_Add(coords, new_Coord(coord.x+1, coord.y));
+	Coords_Add(coords, new_Coord(coord.x+1, coord.y+1));
 
 	return coords;
 }
