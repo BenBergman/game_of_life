@@ -46,3 +46,14 @@ TEST(Coordinate, CanAddCoordinateToList)
 	Coords_Add(&coords, coord);
 	CHECK_EQUAL(1, Coords_Count(&coords));
 }
+
+TEST(Coordinate, CanInitializeNewCoordinate)
+{
+	Coord coord = new_Coord(1, 2);
+	CHECK_EQUAL(1, coord.x);
+	CHECK_EQUAL(2, coord.y);
+
+	coord = new_Coord(6, 4);
+	CHECK_EQUAL(6, coord.x);
+	CHECK_EQUAL(4, coord.y);
+}

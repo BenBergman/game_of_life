@@ -21,6 +21,14 @@ Cell World_GetCell(World world, int index)
 	return world.cell;
 }
 
+Coord new_Coord(int x, int y)
+{
+	Coord coord;
+	coord.x = x;
+	coord.y = y;
+	return coord;
+}
+
 Coord NullCoord()
 {
 	Coord coord = {0};
