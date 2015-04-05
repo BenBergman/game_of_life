@@ -31,27 +31,36 @@ Coord new_Coord(int x, int y)
 
 Coord NullCoord()
 {
-	Coord coord = {0};
+	/* TODO: get C99 or C11 working so struct literal initializations with field names */
+	Coord coord;
+	coord.x = -1;
+	coord.x = -1;
 	return coord;
 }
 
 bool compare_coords(Coord a, Coord b)
 {
-	NOT_USED(a);
-	NOT_USED(b);
-	return true;
+	return a.x == b.x && a.y == b.y;
 }
 
+/* TODO: C90 sucks (I had to declare this outside the funtion to please the compiler) */
+int loop_index;
 Coords new_Coords()
 {
-	Coords coords = {0};
+	Coords coords;
+	coords.count = 0;
+	coords.index = 0;
+	/* TODO: is there a better way to set all in the list no null? */
+	for (loop_index = 0; loop_index < COORDS_SIZE; loop_index++) {
+		coords.list[loop_index] = NullCoord();
+	}
 	return coords;
 }
 
 Coord Coords_First(Coords *coords)
 {
-	NOT_USED(coords);
-	return NullCoord();
+	coords->index = 0;
+	return coords->list[coords->index++];
 }
 
 Coord Coords_Next(Coords *coords)
@@ -62,11 +71,10 @@ Coord Coords_Next(Coords *coords)
 
 int Coords_Count(Coords *coords)
 {
-	return coords->coord_count;
+	return coords->count;
 }
 
 void Coords_Add(Coords *coords, Coord coord)
 {
-	NOT_USED(coord);
-	coords->coord_count++;
+	coords->list[coords->count++] = coord;
 }

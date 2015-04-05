@@ -27,8 +27,12 @@ Coord NullCoord(void);
 bool compare_coords(Coord, Coord);
 
 
+#define COORDS_SIZE 10
+
 typedef struct {
-	int coord_count;
+	int count;
+	int index;
+	Coord list[COORDS_SIZE];
 } Coords;
 
 Coords new_Coords(void);

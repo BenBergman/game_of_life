@@ -27,25 +27,51 @@ TEST(World, AllCellsInNewWorldAreDead)
 	}
 }
 
-TEST_GROUP(Coordinate)
+
+TEST_GROUP(Coordinates)
 {
 };
 
-TEST(Coordinate, CanIterateOverEmptyListOfCoordinates)
+TEST(Coordinates, CanIterateOverEmptyListOfCoordinates)
 {
 	Coords coords = new_Coords();
 	CHECK_EQUAL(0, Coords_Count(&coords));
+
+	int loop_counter = 0;
 	for (Coord coord = Coords_First(&coords); !compare_coords(coord, NullCoord()); coord = Coords_Next(&coords)) {
+		loop_counter++;
 	}
+
+	CHECK_EQUAL(0, loop_counter);
 }
 
-TEST(Coordinate, CanAddCoordinateToList)
+TEST(Coordinates, Iterator)
 {
 	Coords coords = new_Coords();
-	Coord coord;
+	CHECK(!compare_coords(Coords_First(&coords), NullCoord()));
+}
+
+TEST(Coordinates, CanAddCoordinateToList)
+{
+	Coords coords = new_Coords();
+	Coord coord = new_Coord(3, 8);
 	Coords_Add(&coords, coord);
 	CHECK_EQUAL(1, Coords_Count(&coords));
+
+	int loop_counter = 0;
+	for (coord = Coords_First(&coords); !compare_coords(coord, NullCoord()); coord = Coords_Next(&coords)) {
+		loop_counter++;
+		CHECK_EQUAL(3, coord.x);
+		CHECK_EQUAL(8, coord.y);
+	}
+
+	CHECK_EQUAL(1, loop_counter);
 }
+
+
+TEST_GROUP(Coordinate)
+{
+};
 
 TEST(Coordinate, CanInitializeNewCoordinate)
 {
@@ -56,4 +82,17 @@ TEST(Coordinate, CanInitializeNewCoordinate)
 	coord = new_Coord(6, 4);
 	CHECK_EQUAL(6, coord.x);
 	CHECK_EQUAL(4, coord.y);
+}
+
+TEST(Coordinate, SimilarCoordsAreComparedEqual)
+{
+	Coord a = new_Coord(1, 2);
+	Coord b = new_Coord(1, 2);
+	CHECK(compare_coords(a, b));
+}
+ TEST(Coordinate, RegularCoordCanBeDifferentiatedFromNullCoord)
+{
+	Coord a = new_Coord(3, 4);
+	Coord b = NullCoord();
+	CHECK(!compare_coords(a, b));
 }
