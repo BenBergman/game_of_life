@@ -34,14 +34,31 @@ bool compare_coords(Coord a, Coord b)
 	return true;
 }
 
-Coord Coords_First(Coords coords)
+Coords new_Coords()
+{
+	Coords coords = {0};
+	return coords;
+}
+
+Coord Coords_First(Coords *coords)
 {
 	NOT_USED(coords);
 	return NullCoord();
 }
 
-Coord Coords_Next(Coords coords)
+Coord Coords_Next(Coords *coords)
 {
 	NOT_USED(coords);
 	return NullCoord();
+}
+
+int Coords_Count(Coords *coords)
+{
+	return coords->coord_count;
+}
+
+void Coords_Add(Coords *coords, Coord coord)
+{
+	NOT_USED(coord);
+	coords->coord_count++;
 }

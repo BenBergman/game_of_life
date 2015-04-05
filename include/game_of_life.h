@@ -26,10 +26,13 @@ bool compare_coords(Coord, Coord);
 
 
 typedef struct {
-	int placeholder;
+	int coord_count;
 } Coords;
 
-Coord Coords_First(Coords);
-Coord Coords_Next(Coords);
+Coords new_Coords(void);
+Coord Coords_First(Coords*);
+Coord Coords_Next(Coords*);
+int Coords_Count(Coords*);
+void Coords_Add(Coords*, Coord);
 
 #endif

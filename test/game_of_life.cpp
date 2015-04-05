@@ -33,7 +33,16 @@ TEST_GROUP(Coordinate)
 
 TEST(Coordinate, CanIterateOverEmptyListOfCoordinates)
 {
-	Coords coords;
-	for (Coord coord = Coords_First(coords); !compare_coords(coord, NullCoord()); coord = Coords_Next(coords)) {
+	Coords coords = new_Coords();
+	CHECK_EQUAL(0, Coords_Count(&coords));
+	for (Coord coord = Coords_First(&coords); !compare_coords(coord, NullCoord()); coord = Coords_Next(&coords)) {
 	}
+}
+
+TEST(Coordinate, CanAddCoordinateToList)
+{
+	Coords coords = new_Coords();
+	Coord coord;
+	Coords_Add(&coords, coord);
+	CHECK_EQUAL(1, Coords_Count(&coords));
 }
