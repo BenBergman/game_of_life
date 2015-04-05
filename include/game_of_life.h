@@ -1,6 +1,9 @@
 #ifndef _GAME_OF_LIFE_H_
 #define _GAME_OF_LIFE_H_
 
+#include "coord.h"
+#include "coords.h"
+
 typedef struct {
     bool is_dead;
 	bool is_null;
@@ -26,33 +29,6 @@ Cell World_FirstCell(World);
 Cell World_NextCell(World);
 
 
-typedef struct {
-	int x;
-	int y;
-} Coord;
-
-Coord new_Coord(int x, int y);
-Coord NullCoord(void);
-
-bool compare_coords(Coord, Coord);
-
-
-#define COORDS_SIZE 10
-
-typedef struct {
-	int count;
-	int index;
-	Coord list[COORDS_SIZE];
-} CoordsStruct;
-
-typedef CoordsStruct * Coords;
-
-Coords Coords_Create(void);
-void Coords_Destroy(Coords);
-Coord Coords_First(Coords);
-Coord Coords_Next(Coords);
-int Coords_Count(Coords);
-void Coords_Add(Coords, Coord);
 
 Coords Coord_GetNeighbourCoords(Coord);
 
