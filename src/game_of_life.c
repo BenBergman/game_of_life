@@ -34,7 +34,7 @@ Coord NullCoord()
 	/* TODO: get C99 or C11 working so struct literal initializations with field names */
 	Coord coord;
 	coord.x = -1;
-	coord.x = -1;
+	coord.y = -1;
 	return coord;
 }
 
@@ -65,8 +65,7 @@ Coord Coords_First(Coords *coords)
 
 Coord Coords_Next(Coords *coords)
 {
-	NOT_USED(coords);
-	return NullCoord();
+	return coords->list[coords->index++];
 }
 
 int Coords_Count(Coords *coords)

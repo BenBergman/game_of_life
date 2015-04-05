@@ -48,7 +48,7 @@ TEST(Coordinates, CanIterateOverEmptyListOfCoordinates)
 TEST(Coordinates, Iterator)
 {
 	Coords coords = new_Coords();
-	CHECK(!compare_coords(Coords_First(&coords), NullCoord()));
+	CHECK(compare_coords(Coords_First(&coords), NullCoord()));
 }
 
 TEST(Coordinates, CanAddCoordinateToList)
@@ -66,6 +66,25 @@ TEST(Coordinates, CanAddCoordinateToList)
 	}
 
 	CHECK_EQUAL(1, loop_counter);
+}
+
+TEST(Coordinates, CanAddMultipleCoordinatesToList)
+{
+	Coords coords = new_Coords();
+	Coord a = new_Coord(3, 8);
+	Coord b = new_Coord(9, 4);
+	Coords_Add(&coords, a);
+	Coords_Add(&coords, b);
+	CHECK_EQUAL(2, Coords_Count(&coords));
+
+	Coord coord = Coords_First(&coords);
+	CHECK(compare_coords(coord, a));
+
+	coord = Coords_Next(&coords);
+	CHECK(compare_coords(coord, b));
+
+	coord = Coords_Next(&coords);
+	CHECK(compare_coords(coord, NullCoord()));
 }
 
 
