@@ -27,9 +27,6 @@ int World_CellCount(World);
 Cell World_GetCell(World, int);
 Cell World_FirstCell(World);
 Cell World_NextCell(World);
-
-
-
-Coords Coord_GetNeighbourCoords(Coord);
+Coords World_GetNeighbourCoords(World, Coord);
 
 #endif

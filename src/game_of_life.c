@@ -56,9 +56,10 @@ Cell World_NextCell(World self)
 	return NullCell();
 }
 
-
-Coords Coord_GetNeighbourCoords(Coord coord)
+Coords World_GetNeighbourCoords(World self, Coord coord)
 {
+	NOT_USED(self);
+
 	Coords coords = Coords_Create();
 	Coords_Add(coords, new_Coord(coord.x-1, coord.y-1));
 	Coords_Add(coords, new_Coord(coord.x-1, coord.y));

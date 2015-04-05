@@ -47,9 +47,11 @@ TEST(World, AllCellsInNewWorldAreDead)
 TEST(World, CanGetNeighbourCells)
 {
 	Coord a = new_Coord(3, 4);
+	World world = World_Create();
 
-	Coords coords = Coord_GetNeighbourCoords(a);
+	Coords coords = World_GetNeighbourCoords(world, a);
 	CHECK_EQUAL(8, Coords_Count(coords));
 
 	Coords_Destroy(coords);
+	World_Destroy(world);
 }
