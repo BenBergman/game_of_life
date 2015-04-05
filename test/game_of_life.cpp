@@ -26,3 +26,14 @@ TEST(World, AllCellsInNewWorldAreDead)
 		CHECK(Cell_IsDead(World_GetCell(world, i)));
 	}
 }
+
+TEST_GROUP(Coordinate)
+{
+};
+
+TEST(Coordinate, CanIterateOverEmptyListOfCoordinates)
+{
+	Coords coords;
+	for (Coord coord = Coords_First(coords); !compare_coords(coord, NullCoord()); coord = Coords_Next(coords)) {
+	}
+}
