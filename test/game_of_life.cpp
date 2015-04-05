@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "CppUTest/TestHarness.h"
 
 extern "C"
@@ -47,11 +48,12 @@ TEST_GROUP(Coordinates)
 {
 };
 
-#define FOR_EACH_COORD(Y, X) for (Coord Y = Coords_First(&X); !compare_coords(Y, NullCoord()); Y = Coords_Next(&X))
+#define FOR_EACH_COORD(Y, X) for (Coord Y = Coords_First(X); !compare_coords(Y, NullCoord()); Y = Coords_Next(X))
 TEST(Coordinates, CanIterateOverEmptyListOfCoordinates)
 {
-	Coords coords = new_Coords();
-	CHECK_EQUAL(0, Coords_Count(&coords));
+	Coords coords = Coords_Create();
+
+	CHECK_EQUAL(0, Coords_Count(coords));
 
 	int loop_counter = 0;
 	FOR_EACH_COORD(coord, coords) {
@@ -59,20 +61,24 @@ TEST(Coordinates, CanIterateOverEmptyListOfCoordinates)
 	}
 
 	CHECK_EQUAL(0, loop_counter);
+
+	Coords_Destroy(coords);
 }
 
 TEST(Coordinates, Iterator)
 {
-	Coords coords = new_Coords();
-	CHECK(compare_coords(Coords_First(&coords), NullCoord()));
+	Coords coords = Coords_Create();
+	CHECK(compare_coords(Coords_First(coords), NullCoord()));
+	Coords_Destroy(coords);
 }
 
 TEST(Coordinates, CanAddCoordinateToList)
 {
-	Coords coords = new_Coords();
+	Coords coords = Coords_Create();
+
 	Coord a = new_Coord(3, 8);
-	Coords_Add(&coords, a);
-	CHECK_EQUAL(1, Coords_Count(&coords));
+	Coords_Add(coords, a);
+	CHECK_EQUAL(1, Coords_Count(coords));
 
 	int loop_counter = 0;
 	FOR_EACH_COORD(coord, coords) {
@@ -82,25 +88,30 @@ TEST(Coordinates, CanAddCoordinateToList)
 	}
 
 	CHECK_EQUAL(1, loop_counter);
+
+	Coords_Destroy(coords);
 }
 
 TEST(Coordinates, CanAddMultipleCoordinatesToList)
 {
-	Coords coords = new_Coords();
+	Coords coords = Coords_Create();
+
 	Coord a = new_Coord(3, 8);
 	Coord b = new_Coord(9, 4);
-	Coords_Add(&coords, a);
-	Coords_Add(&coords, b);
-	CHECK_EQUAL(2, Coords_Count(&coords));
+	Coords_Add(coords, a);
+	Coords_Add(coords, b);
+	CHECK_EQUAL(2, Coords_Count(coords));
 
-	Coord coord = Coords_First(&coords);
+	Coord coord = Coords_First(coords);
 	CHECK(compare_coords(coord, a));
 
-	coord = Coords_Next(&coords);
+	coord = Coords_Next(coords);
 	CHECK(compare_coords(coord, b));
 
-	coord = Coords_Next(&coords);
+	coord = Coords_Next(coords);
 	CHECK(compare_coords(coord, NullCoord()));
+
+	Coords_Destroy(coords);
 }
 
 
@@ -125,9 +136,20 @@ TEST(Coordinate, SimilarCoordsAreComparedEqual)
 	Coord b = new_Coord(1, 2);
 	CHECK(compare_coords(a, b));
 }
- TEST(Coordinate, RegularCoordCanBeDifferentiatedFromNullCoord)
+
+TEST(Coordinate, RegularCoordCanBeDifferentiatedFromNullCoord)
 {
 	Coord a = new_Coord(3, 4);
 	Coord b = NullCoord();
 	CHECK(!compare_coords(a, b));
+}
+
+TEST(Coordinate, CanGetNeighbourCells)
+{
+	Coord a = new_Coord(3, 4);
+
+	Coords coords = Coord_GetNeighbourCoords(a);
+	CHECK_EQUAL(8, Coords_Count(coords));
+
+	Coords_Destroy(coords);
 }

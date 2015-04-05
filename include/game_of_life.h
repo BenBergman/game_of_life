@@ -43,12 +43,17 @@ typedef struct {
 	int count;
 	int index;
 	Coord list[COORDS_SIZE];
-} Coords;
+} CoordsStruct;
 
-Coords new_Coords(void);
-Coord Coords_First(Coords*);
-Coord Coords_Next(Coords*);
-int Coords_Count(Coords*);
-void Coords_Add(Coords*, Coord);
+typedef CoordsStruct * Coords;
+
+Coords Coords_Create(void);
+void Coords_Destroy(Coords);
+Coord Coords_First(Coords);
+Coord Coords_Next(Coords);
+int Coords_Count(Coords);
+void Coords_Add(Coords, Coord);
+
+Coords Coord_GetNeighbourCoords(Coord);
 
 #endif

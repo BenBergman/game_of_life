@@ -79,37 +79,55 @@ bool compare_coords(Coord a, Coord b)
 	return a.x == b.x && a.y == b.y;
 }
 
-/* TODO: C90 sucks (I had to declare this outside the funtion to please the compiler) */
-int loop_index;
-Coords new_Coords()
+Coords Coords_Create()
 {
-	Coords coords;
-	coords.count = 0;
-	coords.index = 0;
+	Coords coords = calloc(1, sizeof(CoordsStruct));
+	coords->count = 0;
+	coords->index = 0;
 	/* TODO: is there a better way to set all in the list no null? */
-	for (loop_index = 0; loop_index < COORDS_SIZE; loop_index++) {
-		coords.list[loop_index] = NullCoord();
+	for (int i = 0; i < COORDS_SIZE; i++) {
+		coords->list[i] = NullCoord();
 	}
 	return coords;
 }
 
-Coord Coords_First(Coords *coords)
+void Coords_Destroy(Coords self)
+{
+	free(self);
+}
+
+Coord Coords_First(Coords coords)
 {
 	coords->index = 0;
 	return coords->list[coords->index++];
 }
 
-Coord Coords_Next(Coords *coords)
+Coord Coords_Next(Coords coords)
 {
 	return coords->list[coords->index++];
 }
 
-int Coords_Count(Coords *coords)
+int Coords_Count(Coords coords)
 {
 	return coords->count;
 }
 
-void Coords_Add(Coords *coords, Coord coord)
+void Coords_Add(Coords coords, Coord coord)
 {
 	coords->list[coords->count++] = coord;
+}
+
+Coords Coord_GetNeighbourCoords(Coord coord)
+{
+	Coords coords = Coords_Create();
+	Coords_Add(coords, new_Coord(coord.x-1, coord.y-1));
+	Coords_Add(coords, new_Coord(coord.x-1, coord.y-1));
+	Coords_Add(coords, new_Coord(coord.x-1, coord.y-1));
+	Coords_Add(coords, new_Coord(coord.x-1, coord.y-1));
+	Coords_Add(coords, new_Coord(coord.x-1, coord.y-1));
+	Coords_Add(coords, new_Coord(coord.x-1, coord.y-1));
+	Coords_Add(coords, new_Coord(coord.x-1, coord.y-1));
+	Coords_Add(coords, new_Coord(coord.x-1, coord.y-1));
+
+	return coords;
 }
