@@ -19,12 +19,27 @@ TEST_GROUP(World)
 {
 };
 
+TEST(World, Iterator)
+{
+	World world = World_Create();
+
+	CHECK(!compare_cells(World_FirstCell(world), NullCell()));
+
+	World_Destroy(world);
+}
+
 TEST(World, AllCellsInNewWorldAreDead)
 {
-	World world;
-	for (int i = 0; i < World_CellCount(world); i++) {
-		CHECK(Cell_IsDead(World_GetCell(world, i)));
+	World world = World_Create();
+
+	int loop_counter = 0;
+	for (Cell cell = World_FirstCell(world); !compare_cells(cell, NullCell()); cell = World_NextCell(world)) {
+		loop_counter++;
+		CHECK(Cell_IsDead(cell));
 	}
+
+	CHECK(loop_counter != 0);
+	World_Destroy(world);
 }
 
 

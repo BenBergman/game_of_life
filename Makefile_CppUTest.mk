@@ -2,6 +2,8 @@ COMPONENT_NAME = game_of_life
 
 SILENCE = @
 
+CC = gcc -std=c11
+
 CPPUTEST_HOME = CppUTest
 #CPPFLAGS += -I$(CPPUTEST_HOME)/include
 #CXXFLAGS += -include $(CPPUTEST_HOME)/include/CppUTest/MemoryLeakDetectorNewMacros.h
