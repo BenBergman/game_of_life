@@ -5,6 +5,7 @@
 
 #define COORDS_SIZE 10
 
+/* TODO: hide the details in the src file, like TDDFEC 225 */
 typedef struct {
 	int count;
 	int index;

@@ -3,6 +3,7 @@
 
 #include <stdbool.h>
 
+/* TODO: hide the details in the src file, like TDDFEC 225 */
 typedef struct {
 	int x;
 	int y;
