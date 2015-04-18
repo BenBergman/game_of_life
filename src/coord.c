@@ -10,6 +10,14 @@ Coord new_Coord(int x, int y)
 	return coord;
 }
 
+Coord new_CoordFromCell(int cell)
+{
+    Coord coord;
+    coord.x = cell % 11;
+    coord.y = cell / 11;
+    return coord;
+}
+
 Coord NullCoord()
 {
 	/* TODO: get C99 or C11 working so struct literal initializations with field names */

@@ -52,3 +52,19 @@ TEST(Coordinate, AllCoordsReferToUniqueCells)
         CHECK_EQUAL(1, count[i]);
     }
 }
+
+TEST(Coordinate, UniqueCellInUniqueCellOut)
+{
+    const int w = 11;
+    const int h = 17;
+    int count[w*h] = { 0 };
+
+    for (int i = 0; i < w*h; i++) {
+        Coord a = new_CoordFromCell(i);
+        count[Coord_Cell(a)]++;
+    }
+
+    for (int i = 0; i < w*h; i++) {
+        CHECK_EQUAL(1, count[i]);
+    }
+}
