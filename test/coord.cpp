@@ -35,3 +35,20 @@ TEST(Coordinate, RegularCoordCanBeDifferentiatedFromNullCoord)
 	CHECK(!compare_coords(a, b));
 }
 
+TEST(Coordinate, AllCoordsReferToUniqueCells)
+{
+    const int w = 11;
+    const int h = 17;
+    int count[w*h] = { 0 };
+
+    for (int r = 0; r < w; r++) {
+        for (int c = 0; c < h; c++) {
+            Coord a = new_Coord(r, c);
+            count[Coord_Cell(a)]++;
+        }
+    }
+
+    for (int i = 0; i < w*h; i++) {
+        CHECK_EQUAL(1, count[i]);
+    }
+}

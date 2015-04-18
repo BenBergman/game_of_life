@@ -12,6 +12,8 @@ typedef struct {
 Coord new_Coord(int x, int y);
 Coord NullCoord(void);
 
+int Coord_Cell(Coord);
+
 bool compare_coords(Coord, Coord);
 
 #endif

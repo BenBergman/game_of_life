@@ -1,5 +1,7 @@
 #include "coord.h"
 
+#define NOT_USED(x) ((void)(x))
+
 Coord new_Coord(int x, int y)
 {
 	Coord coord;
@@ -15,6 +17,11 @@ Coord NullCoord()
 	coord.x = -1;
 	coord.y = -1;
 	return coord;
+}
+
+int Coord_Cell(Coord self)
+{
+    return self.x + 11 * self.y;
 }
 
 bool compare_coords(Coord a, Coord b)
