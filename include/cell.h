@@ -6,7 +6,12 @@
 typedef struct {
     bool is_dead;
 	bool is_null;
-} Cell;
+} CellStruct;
+
+typedef CellStruct * Cell;
+
+Cell Cell_Create(void);
+void Cell_Destroy(Cell self);
 
 Cell NullCell(void);
 bool Cell_IsDead(Cell);

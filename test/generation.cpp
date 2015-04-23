@@ -31,3 +31,13 @@ TEST(Generation, NewGenerationStartsAllDead)
 
     Generation_Destroy(gen);
 }
+
+TEST(Generation, CellCountIncreasesWhenCellSpawns)
+{
+    Generation gen = Generation_Create();
+
+    Generation_SpawnCell(gen, 3);
+    CHECK_EQUAL(1, Generation_GetLiveCellCount(gen));
+
+    Generation_Destroy(gen);
+}

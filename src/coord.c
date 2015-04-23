@@ -1,3 +1,7 @@
+/**
+ * The purpose of a coordinate is to find neighbours of cells.
+ */
+
 #include "coord.h"
 
 #define NOT_USED(x) ((void)(x))

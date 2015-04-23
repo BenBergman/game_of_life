@@ -4,13 +4,24 @@
 
 #define NOT_USED(x) ((void)(x))
 
+Cell Cell_Create()
+{
+    Cell cell = calloc(1, sizeof(CellStruct));
+    cell->is_dead = true;
+    cell->is_null = false;
+    return cell;
+}
+
+void Cell_Destroy(Cell self)
+{
+    if (self != 0) {
+        free(self);
+    }
+}
+
 Cell NullCell()
 {
-	Cell cell = {
-		.is_dead = true,
-		.is_null = false,
-	};
-	return cell;
+	return 0;
 }
 
 bool Cell_IsDead(Cell cell)
@@ -21,5 +32,14 @@ bool Cell_IsDead(Cell cell)
 
 bool compare_cells(Cell a, Cell b)
 {
-	return a.is_null == b.is_null && a.is_dead == b.is_dead;
+    if (a == 0) {
+        if (b == 0) {
+            return true;
+        }
+        return false;
+    }
+    if (b == 0) {
+        return false;
+    }
+	return a->is_null == b->is_null && a->is_dead == b->is_dead;
 }

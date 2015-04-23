@@ -1,18 +1,9 @@
 #ifndef _GAME_OF_LIFE_H_
 #define _GAME_OF_LIFE_H_
 
+#include "cell.h"
 #include "coord.h"
 #include "coords.h"
-
-typedef struct {
-    bool is_dead;
-	bool is_null;
-} Cell;
-
-Cell NullCell(void);
-bool Cell_IsDead(Cell);
-
-bool compare_cells(Cell, Cell);
 
 
 typedef struct {
